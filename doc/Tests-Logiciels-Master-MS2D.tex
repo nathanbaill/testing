@@ -1,0 +1,133 @@
+\documentclass{beamer}
+
+% Style
+\usepackage{xcolor}
+\usetheme{Madrid}
+% Color
+\definecolor{flatblue}{RGB}{106, 137, 204}
+\usecolortheme[named=flatblue]{structure}
+% Font
+\usepackage{fontspec}
+\setsansfont{EB Garamond}
+% Code
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\definecolor{flatgreen}{RGB}{0, 98, 102}
+\definecolor{flatgreyish}{RGB}{209, 216, 224}
+\lstset{
+    basicstyle=\ttfamily,
+    backgroundcolor=\color{flatgreyish},
+    keywordstyle=\color{flatgreen},        % 	Keywords font ('*' = uppercase)
+    commentstyle=\color{flatblue},              % Step between two line-numbers
+    columns=fullflexible,
+    breaklines=true
+}
+
+% Title
+\title{Tests Logiciels - Master MS2D}
+\author{Christophe Brun}
+\institute{Campus Saint-Michel IT}
+\date{21 septembre 2033}
+\beamertemplatenavigationsymbolsempty
+
+
+
+\titlegraphic{\includegraphics[width=2cm]{image/logo-papit.png}\hspace*{4.75cm}~%
+\includegraphics[width=2cm]{image/logo-campus-saint-michel-it.png}
+}
+\begin{document}
+
+    \begin{frame}
+        \transdissolve
+        \titlepage
+    \end{frame}
+
+% Diapo 1
+    \begin{frame}
+        \frametitle{Histoire du test logiciel moderne}
+        \transdissolve
+        \begin{itemize}
+            \item ISTQB, l’International Software Testing Qualifications Board a été fondée en 1998.\footnote{ISTQB, About Us, \url{https://www.istqb.org/about-us/who-we-are}}
+
+            \item Dans son livre Extreme Programming Explained, Kent Beck parle de Test-first Programming en 1999.
+
+            \item Les standards modernes datent de la fin des années 90, début des années 2000.
+
+            \item JUnit, le framework de test le plus utilisé en Java date de 2002.\footnote{Steven J. Zeil, Unit Testing Frameworks, \url{https://www.cs.odu.edu/~zeil/cs350/latest/Public/junit/index.html}}
+
+            \item Début du BDD (Behavior-Driven Development) avec JBehave, censé remplacer JUnit en utilisant le behavior au lieu de test, date de 2023.\footnote{Cucumber, \url{https://cucumber.io/docs/bdd/history/}}
+        \end{itemize}
+    \end{frame}
+
+% Diapo 2
+    \begin{frame}
+        \transdissolve
+        \frametitle{Pourquoi le testing ?}
+        \begin{itemize}
+            \item Les frameworks de test retournent 3 statuts, OK, FAILED et ERROR.
+
+            \item OK si aucune erreur n’a lieu et FAILED en cas d’erreur d’assertion, AssertionError en Python et Java.
+
+            \item Pas de standard universellement accepté mais un format domine, le JUnit. Un XML le défini par la grammaire \url{https://windyroad.com.au/dl/Open\%20Source/JUnit.xsd}.
+
+            \item Vient de l’écosystème Java avec le package du même nom, JUnit, mais est présent dans la plupart des frameworks de test comme PHPUnit, Pytest.
+
+            \item L’interopérabilité entre les outils est permise par cette XSD commune mais pas plus de contrainte. Par exemple, l’interopérabilité entre les frameworks de test et les outils de CI/CD.
+
+            \item Certains outils, souvent des solutions propriétaires, rechignent toujours à exporter un JUnit contenant les résultats de test pour fermer leur environnement.
+
+        \end{itemize}
+    \end{frame}
+
+% Diapo 3
+    \begin{frame}[fragile]
+        \frametitle{L'assertion error}
+        \framesubtitle{En Python}
+        \transdissolve
+        L’instruction \lstinline{assert} vérifie une condition.
+        Si la condition est vraie, cela ne fait rien et votre programme continue simplement à s’exécuter. Mais si la condition d’assertion est fausse, elle lève une exception \lstinline{AssertionError}.
+        \begin{lstlisting}[language=Python]
+assert 23 % 2 == 0, "Le restant de la division est différent de 0"
+        \end{lstlisting}
+        Étant toujours fausse, le programme crash.
+        \begin{lstlisting}[language=sh]
+chrichri@chrichri-HKD-WXX:~$ python3 -c 'assert 23 % 2 == 0, "Le restant de la division est différent de 0"'
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+AssertionError: Le restant de la division est différent de 0
+        \end{lstlisting}
+    \end{frame}
+
+% Diapo 4
+    \begin{frame}[fragile]
+        \frametitle{L'assertion error}
+        \framesubtitle{En Python avec Pytest}
+        \transdissolve
+        Un module de test Pytest est un module Python préfixé par \lstinline{test_}.
+        Ici par exemple, la précédente assertion sous forme dans le module de test \lstinline{test_division.py}.
+        \begin{lstlisting}[language=Python]
+def test_divide():  # Un test Pytest est préfixé par test_
+    assert 23 % 2 == 0, "Le restant de la division est différent de 0."
+        \end{lstlisting}
+    \end{frame}
+
+% Diapo 5
+    \begin{frame}[fragile]
+        \frametitle{L'assertion error}
+        \framesubtitle{En Python avec Pytest}
+        \transdissolve
+        Lancé avec la commande \lstinline{python -m pytest test_divison.py}, pytest affiche le rapport de test.
+        \begin{lstlisting}[language=sh]
+...
+def test_divide():  # Un test Pytest est préfixé par test_
+>       assert 23 % 2 == 0, "Le restant de la division est différent de 0."
+E       AssertionError: Le restant de la division est différent de 0.
+E       assert (23 % 2) == 0
+
+test_divison.py:2: AssertionError
+...
+        \end{lstlisting}
+    \end{frame}
+
+\end{document}
