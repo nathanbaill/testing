@@ -7,22 +7,42 @@
 \definecolor{flatblue}{RGB}{106, 137, 204}
 \usecolortheme[named=flatblue]{structure}
 % Font
+\usepackage{emoji}
 \usepackage{fontspec}
+\usepackage{csquotes}
 \setsansfont{EB Garamond}
 % Code
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=flatblue,
+    filecolor=flatblue,
+    urlcolor=flatblue,
+    citecolor=flatblue
+}
 \definecolor{flatgreen}{RGB}{0, 98, 102}
 \definecolor{flatgreyish}{RGB}{209, 216, 224}
 \lstset{
-    basicstyle=\ttfamily,
+    basicstyle=\ttfamily\scriptsize,
     backgroundcolor=\color{flatgreyish},
-    keywordstyle=\color{flatgreen},        % 	Keywords font ('*' = uppercase)
-    commentstyle=\color{flatblue},              % Step between two line-numbers
+    keywordstyle=\color{flatgreen},        % Keywords font ('*' = uppercase)
+    commentstyle=\color{flatblue},         % Step between two line-numbers
     columns=fullflexible,
     breaklines=true
 }
+
+% Highlight
+\usepackage[most]{tcolorbox}
+\usepackage{amsmath}
+\definecolor{flathlredback}{RGB}{255, 165, 2}
+\definecolor{flathlredframe}{RGB}{255, 71, 87}
+\tcbset{textmarker/.style={%
+skin=enhancedmiddle jigsaw,breakable,parbox=false,
+boxrule=0mm,leftrule=2mm,rightrule=0mm,boxsep=0mm,arc=0mm,outer arc=0mm,
+left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
+\newtcolorbox{dangercolorbox}{textmarker,colback=flathlredback,colframe=flathlredframe}
 
 % Title
 \title{Tests Logiciels - Master MS2D}
@@ -43,14 +63,113 @@
         \titlepage
     \end{frame}
 
-% Diapo 1
+    \begin{frame}
+        \frametitle{Tests Logiciels}
+        \framesubtitle{Le programme des 3 jours du module}
+        \transdissolve
+        Compétences:
+        \begin{itemize}
+            \item Savoir développer et mettre en place des tests unitaires sur une application.
+
+            \item Savoir développer et mettre en place des tests d’intégration sur une application.
+
+            \item Savoir configurer un pipeline d’intégration continue sur une application.
+
+        \end{itemize}
+        \centering
+        \includegraphics[width=3cm]{image/funny-cartoon-of-a-smart-young-computer-scientist.png}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Tests Logiciels}
+        \framesubtitle{Le programme des 3 jours du module}
+        \transdissolve
+        Programme:
+        \begin{enumerate}
+            \item Les tests unitaires
+            \begin{itemize}
+                \item Qu’est-ce qu’un test ?
+                \item Les tests unitaires
+                \item Les bonnes pratiques
+                \item Le Test Driven Development
+                \item Le code coverage
+                \item Tests avec langage naturel
+            \end{itemize}
+            \item  Les tests d’intégration
+            \begin{itemize}
+                \item  Les tests d’intégration
+                \item  Le fonctionnement
+                \item  Les bonnes pratiques
+            \end{itemize}
+            \item L’intégration continue
+            \begin{itemize}
+                \item  Mise en place d’une plateforme d’intégration continue (GitLab CI)
+                \item  Conteneurisation d’une application (API)
+                \item  Configuration d’un pipeline de tests
+            \end{itemize}
+        \end{enumerate}
+    \end{frame}
+
+    \begin{frame}
+        \transdissolve
+        \frametitle{Intervenant sur le module Tests Logiciels}
+        \framesubtitle{Christophe Brun, CTO d'In France}
+
+        \begin{columns}
+            \column{0.7\textwidth}
+            \begin{itemize}
+                \item 1\textsuperscript{ere} année d’intervenant à Saint-Michel \emoji{star-struck}.
+
+                \item 7 ans de conseil en développement au sein d’SSII.
+
+                \item 6 ans de conseil en développement à mon compte \href{https://papit.fr}{PapIT}.
+
+                \item Directeur technique et associé d’\href{https://in-france.fr}{In France}.
+
+                \item Passionné!
+                \bigbreak
+                \begin{columns}
+                    \column{0.5\textwidth}
+                    \centering
+                    \includegraphics[width=3cm]{image/logo-uppa.png}
+                    \column{0.5\textwidth}
+                    \centering
+                    \includegraphics[width=3cm]{image/logo-universite-bordeaux.jpg}
+                \end{columns}
+            \end{itemize}
+            \column{0.3\textwidth}
+            \centering
+            \includegraphics[width=5cm]{image/trombine-christophe.jpg}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Qu’est-ce qu’un test ?}
+        \framesubtitle{Définition de l'International Software Testing Qualifications Board et IBM}
+        \transdissolve
+        L’ISTQB définit les termes suivants dans son glossaire\footnote{ISTQB, Glossaire des termes utilisés en tests de logiciels, \url{https://www.cftl.fr/wp-content/uploads/2018/10/Glossaire-des-tests-logiciels-v3_2F-ISTQB-CFTL-1.pdf}} :
+
+        \textbf{Test :} Un ensemble d’un ou plusieurs cas
+        de tests.
+
+        \textbf{Cas de test :} Un ensemble de conditions
+        préalables, de données d'entrée, d'actions
+        (le cas échéant), de résultats attendus et
+        de postconditions, élaboré sur la base des
+        conditions de test.
+        \bigbreak
+        Selon IBM\footnote{IBM, Qu'est-ce que le test logiciel ?, \url{https://www.ibm.com/fr-fr/topics/software-testing}} :
+
+        \textquote{Le test logiciel est le processus qui consiste à évaluer et à vérifier qu'un produit ou une application logicielle fait ce qu'il ou elle est censé(e) faire.}
+    \end{frame}
+
     \begin{frame}
         \frametitle{Histoire du test logiciel moderne}
         \transdissolve
         \begin{itemize}
             \item ISTQB, l’International Software Testing Qualifications Board a été fondée en 1998.\footnote{ISTQB, About Us, \url{https://www.istqb.org/about-us/who-we-are}}
 
-            \item Dans son livre Extreme Programming Explained, Kent Beck parle de Test-first Programming en 1999.
+            \item Dans son livre Extreme Programming Explained, Kent Beck parle de \textquote{Test-first Programming} en 1999.
 
             \item Les standards modernes datent de la fin des années 90, début des années 2000.
 
@@ -60,16 +179,16 @@
         \end{itemize}
     \end{frame}
 
-% Diapo 2
+
     \begin{frame}
         \transdissolve
-        \frametitle{Pourquoi le testing ?}
+        \frametitle{Brief sur les outils de test logiciel}
         \begin{itemize}
             \item Les frameworks de test retournent 3 statuts, OK, FAILED et ERROR.
 
-            \item OK si aucune erreur n’a lieu et FAILED en cas d’erreur d’assertion, AssertionError en Python et Java.
+            \item OK si aucune erreur n’a lieu et FAILED en cas d’erreur d’assertion, \lstinline{AssertionError} en Python et Java.
 
-            \item Pas de standard universellement accepté mais un format domine, le JUnit. Un XML le défini par la grammaire \url{https://windyroad.com.au/dl/Open\%20Source/JUnit.xsd}.
+            \item Pas de standard universellement accepté mais un format domine, le XML JUnit. Un XML le définit par la grammaire \url{https://windyroad.com.au/dl/Open\%20Source/JUnit.xsd}.
 
             \item Vient de l’écosystème Java avec le package du même nom, JUnit, mais est présent dans la plupart des frameworks de test comme PHPUnit, Pytest.
 
@@ -80,7 +199,7 @@
         \end{itemize}
     \end{frame}
 
-% Diapo 3
+
     \begin{frame}[fragile]
         \frametitle{L'assertion error}
         \framesubtitle{En Python}
@@ -99,25 +218,47 @@ AssertionError: Le restant de la division est différent de 0
         \end{lstlisting}
     \end{frame}
 
-% Diapo 4
-    \begin{frame}[fragile]
-        \frametitle{L'assertion error}
-        \framesubtitle{En Python avec Pytest}
+
+    \begin{frame}
+        \frametitle{Pourquoi Pytest pour le testing}
         \transdissolve
-        Un module de test Pytest est un module Python préfixé par \lstinline{test_}.
-        Ici par exemple, la précédente assertion sous forme dans le module de test \lstinline{test_division.py}.
+        \textquote{pytest is a mature full-featured Python testing tool that helps you write better programs.\footnote{pytest: helps you write better programs , \url{https://docs.pytest.org}}}
+        \begin{columns}
+            \column{0.6\textwidth}
+            Pytest est le framework de test en Python le plus utilisé selon les sondages de JetBrains\footnotemark.
+
+            Seuls JUnit et Pytest sont pour tous usages, les autres sont orientés web.
+            \column{0.4\textwidth}
+            \centering
+            \includegraphics[width=5cm]{image/jetbrains-survey-testing-framework.png}
+        \end{columns}
+        \footnotetext{JetBrains, Which test frameworks , \url{https://www.jetbrains.com/lp/devecosystem-2022/testing/}}
+
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \frametitle{Pytest}
+        \framesubtitle{Rédiger un test}
+        \transdissolve
+        \begin{itemize}
+            \item Un module de test Pytest est un module Python préfixé par \lstinline{test_}.
+
+            \item Toutes les méthodes préfixées par \lstinline{test_} sont exécutées par Pytest. Qu'elles soient
+            dans une classe ou non. Les autres méthodes ne sont pas exécutées sauf si les tests ne les appellent.
+        \end{itemize}
+        Ici par exemple, la précédente assertion est intégrées dans une méthode nommée \lstinline{test_divide} dans le module de test \lstinline{test_division.py}.
         \begin{lstlisting}[language=Python]
 def test_divide():  # Un test Pytest est préfixé par test_
     assert 23 % 2 == 0, "Le restant de la division est différent de 0."
         \end{lstlisting}
     \end{frame}
 
-% Diapo 5
+
     \begin{frame}[fragile]
-        \frametitle{L'assertion error}
-        \framesubtitle{En Python avec Pytest}
+        \frametitle{Pytest}
+        \framesubtitle{Lancer les tests}
         \transdissolve
-        Lancé avec la commande \lstinline{python -m pytest test_divison.py}, pytest affiche le rapport de test.
+        Lancer avec la commande \lstinline{python -m pytest test_divison.py}, Pytest affiche le rapport de test.
         \begin{lstlisting}[language=sh]
 ...
 def test_divide():  # Un test Pytest est préfixé par test_
@@ -128,6 +269,108 @@ E       assert (23 % 2) == 0
 test_divison.py:2: AssertionError
 ...
         \end{lstlisting}
+
+        De très utiles et nombreuses options peuvent compléter cette ligne de commande.
+        Pour les découvrir, lancez \lstinline{python -m pytest --help} et \textquote{RTFM}.
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \frametitle{Pytest}
+        \framesubtitle{Les tests paramétriques}
+        \transdissolve
+        Les tests paramétriques sont des tests qui prennent un ensemble de paramètres en entrées.
+
+        Ils permettent de tester plusieurs cas avec un seul test.
+
+        Le rapport génère un cas de test par paramètre. Il est donc plus détaillé et permet de trouvé
+        les tests en échec plus facilement que si l'\lstinline {assert} était dans une boucle, ce qui ne donne qu'un statut OK ou Fail dans le rapport.
+        \begin{lstlisting}[language=Python]
+import pytest
+...
+@pytest.mark.parametrize("dividend", range(100))  # Paramétrage du test
+def test_divide_from_0_to_99(dividend):  # Doit avoir un argument présent dans le paramétrage
+    assert dividend % 2 == 0, "Le restant de la division est différent de 0."
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \frametitle{Pytest}
+        \framesubtitle{Les tests paramétriques}
+        \transdissolve
+        Génère 100 cas de tests. Met en évidence les dividendes dont le restant de la division par 2 est différent de 0, ici 1 par exemple.
+        \begin{lstlisting}[language=sh]
+collecting ... collected 100 items
+
+test_divison.py::test_divide_from_0_to_99[0] PASSED                      [  1%]
+test_divison.py::test_divide_from_0_to_99[1] FAILED                      [  2%]
+test_divison.py:7 (test_divide_from_0_to_99[1])
+1 != 0
+
+Expected :0
+Actual   :1
+<Click to see difference>
+
+dividend = 1
+
+    @pytest.mark.parametrize("dividend", range(100))  # Paramétrage du test
+    def test_divide_from_0_to_99(dividend):  # Doit avoir un argument présent dans le paramétrage
+>       assert dividend % 2 == 0, "Le restant de la division est différent de 0."
+E       AssertionError: Le restant de la division est différent de 0.
+E       assert (1 % 2) == 0
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \frametitle{Pytest}
+        \framesubtitle{Plantage dans un test, quel statut?}
+        \transdissolve
+        Ce test crash avant l'assert.
+        \begin{lstlisting}[language=Python]
+def test_fail_or_error():  # Une erreur donne un fail ou error?
+    dividende = 23 / 0
+    assert dividende % 2 == 0, \
+        "Le restant de la division est différent de 0."
+        \end{lstlisting}
+        Malgré l'absence d'\lstinline{assertionError}, le test est en échec et non en erreur.
+        \begin{lstlisting}[language=sh]
+test_divison.py::test_fail_or_error FAILED                               [100%]
+test_divison.py:12 (test_fail_or_error)
+def test_fail_or_error():  # Une erreur donne un fail ou error?
+>       dividende = 23 / 0
+E       ZeroDivisionError: division by zero
+
+test_divison.py:14: ZeroDivisionError
+        \end{lstlisting}
+
+        \begin{dangercolorbox}
+            Pour éviter les faux négatifs, un test doit tendre, tant que faire se peut, vers un \lstinline{assert}. Pour cela pensez à utiliser les fonctions \lstinline{parametrize} et \lstinline{fixture}.
+        \end{dangercolorbox}
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \frametitle{Pytest}
+        \framesubtitle{Les fixtures}
+        \transdissolve
+        Un \lstinline{return} ou un \lstinline{yield} envoie l'objet au test dans les
+        conditions voulues.
+        \begin{lstlisting}[language=Python]
+def customer_without_table():
+    """...
+    """
+    customer = Customer()  # Avant le test, c'est le setup
+    yield customer  # Un yield évite de sortir de la fonction
+    customer.con.close()  # Après le test, le teardown
+        \end{lstlisting}
+        Le test n'a qu'une seule ligne, qu'un \lstinline{assert} l'échec ne
+        pourrait venir que de là.
+        \begin{lstlisting}[language=Python]
+def test_instantiation(customer_without_table):
+    """...
+    """
+    assert isinstance(customer_without_table.con, Connection)
+        \end{lstlisting}
+        En cas de plantage dans la fixture, i.e. avant ou après le test, la sanction
+        serait erreur et non échec.
     \end{frame}
 
 \end{document}
