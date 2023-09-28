@@ -2,6 +2,7 @@
 
 % Style
 \usepackage{xcolor}
+
 \usetheme{Madrid}
 \usepackage{dirtree}
 % Color
@@ -37,13 +38,13 @@
 % Highlight
 \usepackage[most]{tcolorbox}
 \usepackage{amsmath}
-\definecolor{flathlredback}{RGB}{255, 165, 2}
-\definecolor{flathlredframe}{RGB}{255, 71, 87}
+\definecolor{flatorange}{RGB}{255, 165, 2}
+\definecolor{flatred}{RGB}{255, 71, 87}
 \tcbset{textmarker/.style={%
 skin=enhancedmiddle jigsaw,breakable,parbox=false,
 boxrule=0mm,leftrule=2mm,rightrule=0mm,boxsep=0mm,arc=0mm,outer arc=0mm,
 left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
-\newtcolorbox{dangercolorbox}{textmarker,colback=flathlredback,colframe=flathlredframe}
+\newtcolorbox{dangercolorbox}{textmarker,colback=flatorange,colframe=flatred}
 
 % Title
 \title{Tests Logiciels - Master MS2D}
@@ -66,11 +67,17 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
         \titlepage
     \end{frame}
 
+    \begin{frame}{Table des matières}
+        \tableofcontents
+    \end{frame}
+
+
+    \section{Programme du module}
     \begin{frame}
         \frametitle{Tests Logiciels}
         \framesubtitle{Le programme des 3 jours du module}
         \transdissolve
-        Compétences:
+        Compétences :
         \begin{itemize}
             \item Savoir développer et mettre en place des tests unitaires sur une application.
 
@@ -87,7 +94,7 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
         \frametitle{Tests Logiciels}
         \framesubtitle{Le programme des 3 jours du module}
         \transdissolve
-        Programme:
+        Programme :
         \begin{enumerate}
             \item Les tests unitaires
             \begin{itemize}
@@ -129,7 +136,7 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
 
                 \item Directeur technique et associé d’\href{https://in-france.fr}{In France}.
 
-                \item Passionné!
+                \item Passionné !
                 \bigbreak
                 \begin{columns}
                     \column{0.5\textwidth}
@@ -146,6 +153,8 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
         \end{columns}
     \end{frame}
 
+
+    \section{Généralités}
     \begin{frame}
         \frametitle{Qu’est-ce qu’un test ?}
         \framesubtitle{Définition de l'International Software Testing Qualifications Board et IBM}
@@ -195,7 +204,7 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
 
             \item Vient de l’écosystème Java avec le package du même nom, JUnit, mais est présent dans la plupart des frameworks de test comme PHPUnit, Pytest.
 
-            \item L’interopérabilité entre les outils est permise par cette XSD commune mais pas plus de contrainte. Par exemple, l’interopérabilité entre les frameworks de test et les outils de CI/CD.
+            \item L’interopérabilité entre les outils est permise par cette XSD commune, mais pas plus de contrainte. Par exemple, l’interopérabilité entre les frameworks de test et les outils de CI/CD.
 
             \item Certains outils, souvent des solutions propriétaires, rechignent toujours à exporter un JUnit contenant les résultats de test pour fermer leur environnement.
 
@@ -222,6 +231,7 @@ AssertionError: Le restant de la division est différent de 0
     \end{frame}
 
 
+    \section{Pytest}
     \begin{frame}
         \frametitle{Pourquoi Pytest pour le testing}
         \transdissolve
@@ -432,6 +442,49 @@ def customer_without_table():
             \centering
             \includegraphics[width=1cm]{image/logo-pycharm.png}
         \end{columns}
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \frametitle{Pytest}
+        \framesubtitle{Le coverage}
+        \transdissolve
+        Pas de support natif du coverage par Pytest, il faut installer le plugin \lstinline{pytest-cov}\footnote{Welcome to pytest-cov’s documentation!, \url{https://pytest-cov.readthedocs.io/en/latest/}}.
+
+        Pour appeler le plugin, il faut passe en argument le module à tester et le(s) test(s) de ce dernier.
+
+
+        \begin{lstlisting}[language=sh]
+pytest --cov=\textcolor{flatgreen}{customer_database} ./test_customer_database.py
+...
+rootdir: /home/chrichri/Documents/Campus-St-Michel-IT/testing
+plugins: cov-4.1.0
+collected 6 items
+
+test_customer_database.py ......                                                                                                                                                                                                 [100%]
+
+---------- coverage: platform linux, python 3.11.4-final-0 -----------
+Name                   Stmts   Miss  Cover
+------------------------------------------
+customer_database.py       9      0   100%
+------------------------------------------
+TOTAL                      9      0   100%
+        \end{lstlisting}
+
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \frametitle{Pytest}
+        \framesubtitle{Le coverage}
+        \transdissolve
+        \begin{columns}
+
+            \column{0.5\textwidth}
+            \centering
+            \includegraphics[width=5cm]{image/html-coverage.png}
+            \column{0.5\textwidth}
+            L'option \lstinline{--cov-report=html} permet de générer un rapport HTML plus détaillé qui met en lumière quelles parties du code sont couvertes par les tests et lesquelles ne le sont pas.
+        \end{columns}
+
     \end{frame}
 
     \begin{frame}[fragile]

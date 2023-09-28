@@ -1,3 +1,4 @@
 arduino-simple-rpc
 ipython
 pytest
+pytest-cov
