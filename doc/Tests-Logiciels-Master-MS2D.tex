@@ -54,8 +54,10 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
 
 
 
-\titlegraphic{\includegraphics[width=2cm]{image/logo-papit.png}\bgibreak
-\includegraphics[width=2cm]{image/logo-campus-saint-michel-it.png}
+\titlegraphic{
+    \bigbreak
+    \includegraphics[width=2cm]{image/logo-papit.png}
+    \includegraphics[width=2cm]{image/logo-campus-saint-michel-it.png}
 }
 \begin{document}
 
@@ -135,7 +137,7 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
                     \includegraphics[width=3cm]{image/logo-uppa.png}
                     \column{0.5\textwidth}
                     \centering
-                    \includegraphics[width=3cm]{image/logo-universite-bordeaux.jpg}
+                    \includegraphics[width=3cm]{image/logo-universite-bordeaux.png}
                 \end{columns}
             \end{itemize}
             \column{0.3\textwidth}
@@ -428,7 +430,7 @@ def customer_without_table():
             PyCharm intègre par défaut Pytest comme lanceur de tests et fournit l'autocomplétion pour les fixtures du \lstinline{conftest.py}.
             \column{0.1\textwidth}
             \centering
-            \includegraphics[width=1cm]{image/logo-pycharm.jpeg}
+            \includegraphics[width=1cm]{image/logo-pycharm.png}
         \end{columns}
     \end{frame}
 
@@ -441,7 +443,10 @@ def customer_without_table():
             Pytest est un framework complet voir complexe.
 
             Mais quasi toutes les fonctionnalités auxquelles on peut penser sont déjà implémentées et décrites une documentation de qualité.
-            La liste est trop longue, nous venons juste d'en découvrir les principales.
+
+            Comme avec toutes les grosses libraries, il faut avoir confiance en leur design et chercher dedans avant de réinventer la roue.
+
+            La liste des fonctionnalités est trop longue, nous venons juste d'en découvrir les principales.
             \bigbreak
             Donc une fois encore, comme pour toutes les bonnes libraires à connaître, le secret est \textquote{\textbf{\Large{RTFM}}} !
             \column{0.3\textwidth}
