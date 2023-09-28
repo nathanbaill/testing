@@ -3,6 +3,7 @@
 % Style
 \usepackage{xcolor}
 \usetheme{Madrid}
+\usepackage{dirtree}
 % Color
 \definecolor{flatblue}{RGB}{106, 137, 204}
 \usecolortheme[named=flatblue]{structure}
@@ -53,7 +54,7 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
 
 
 
-\titlegraphic{\includegraphics[width=2cm]{image/logo-papit.png}\hspace*{4.75cm}~%
+\titlegraphic{\includegraphics[width=2cm]{image/logo-papit.png}\bgibreak
 \includegraphics[width=2cm]{image/logo-campus-saint-michel-it.png}
 }
 \begin{document}
@@ -351,8 +352,9 @@ test_divison.py:14: ZeroDivisionError
         \frametitle{Pytest}
         \framesubtitle{Les fixtures}
         \transdissolve
-        Un \lstinline{return} ou un \lstinline{yield} envoie l'objet au test dans les
-        conditions voulues.
+        Cf. \url{https://github.com/St-Michel-IT/testing/blob/main/test_customer_database.py}
+
+        Un \lstinline{return} ou un \lstinline{yield} envoie l'objet au test dans l'état voulu.
         \begin{lstlisting}[language=Python]
 def customer_without_table():
     """...
@@ -371,6 +373,82 @@ def test_instantiation(customer_without_table):
         \end{lstlisting}
         En cas de plantage dans la fixture, i.e. avant ou après le test, la sanction
         serait erreur et non échec.
+
+        Le rapport reflétera fidèlement le test et sera exempt de faux négatif.
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \frametitle{Pytest}
+        \framesubtitle{Le scope des fixtures}
+        \transdissolve
+        L'argument \lstinline{scope} du décorateur \lstinline{pytest.fixture} défini la durée de vie
+        de la fixture. Il peut prendre 3 valeurs :
+        \begin{itemize}
+            \item \lstinline{function} : La valeur par défaut si on ne met rien.
+            La fixture est exécutée à chaque fonction de test \lstinline{def test_...} qui l'appelle directement ou indirectement, donc les éventuels setup et teardown de cette dernière aussi.
+            \item \lstinline{module} : Une fois par module \lstinline{test_....py}.
+            \item \lstinline{session} : Une seule fois durant la session de test quel que soit le nombre de modules et de tests exécutés.
+        \end{itemize}
+        \begin{lstlisting}[language=Python]
+@pytest.fixture(scope="function")  # Scope de la fixture, par default function
+def customer_without_table():
+    """
+    Connection to in memory database using the Customer class
+        \end{lstlisting}
+
+        Pour tester une API en étant sûr le token n'est pas périmé, on peut utiliser le scope \lstinline{function} pour en avoir un nouveau à chaque appel.
+
+        Si préparer les conditions initiales, le setup, prend du temps, on évitera si possible de se répéter à chaque test avec les scopes \lstinline{module} \lstinline{session}.
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \frametitle{Pytest}
+        \framesubtitle{\lstinline{Le conftest.py}}
+        \transdissolve
+        Il n'a qu'une seule particularité, c'est d'être importé automatiquement par Pytest lorsqu'il est présent dans le dossier courant des tests.
+
+        Il permet de factoriser les fixtures et les paramétrages de tests utilisés dans plusieurs modules de tests, car ces derniers seront automatiquement disponible sans même un import dans le module.
+        \begin{columns}
+            \column{0.5\textwidth}
+            \dirtree{%
+                .1 ./.
+                .2 {conftest.py}.
+                .2 {\textcolor{flatgreen}{test\_no\_directory.py}}.
+                .2 unit.
+                .3 {\textcolor{flatgreen}{test\_integration.py}}.
+                .2 functional.
+                .3 {\textcolor{flatgreen}{test\_functional.py}}.
+            }\column
+            {0.5\textwidth}
+            Pour tous ces tests, s'ils sont lancés depuis la racine avec la commande \lstinline{pytest}, le \lstinline{conftest.py} sera importé automatiquement.
+        \end{columns}
+        \bigbreak
+        \begin{columns}
+            \column{0.9\textwidth}
+            PyCharm intègre par défaut Pytest comme lanceur de tests et fournit l'autocomplétion pour les fixtures du \lstinline{conftest.py}.
+            \column{0.1\textwidth}
+            \centering
+            \includegraphics[width=1cm]{image/logo-pycharm.jpeg}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \frametitle{Pytest}
+        \framesubtitle{Le secret de la réussite}
+        \transdissolve
+        \begin{columns}
+            \column{0.7\textwidth}
+            Pytest est un framework complet voir complexe.
+
+            Mais quasi toutes les fonctionnalités auxquelles on peut penser sont déjà implémentées et décrites une documentation de qualité.
+            La liste est trop longue, nous venons juste d'en découvrir les principales.
+            \bigbreak
+            Donc une fois encore, comme pour toutes les bonnes libraires à connaître, le secret est \textquote{\textbf{\Large{RTFM}}} !
+            \column{0.3\textwidth}
+            \centering
+            \includegraphics[width=3cm]{image/girl-rtfm.png}
+        \end{columns}
+
     \end{frame}
 
 \end{document}
