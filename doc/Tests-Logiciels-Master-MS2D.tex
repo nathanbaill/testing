@@ -191,6 +191,22 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
         \end{itemize}
     \end{frame}
 
+    \begin{frame}
+        \transdissolve
+        \frametitle{La Pyramide des tests}
+        \begin{columns}
+            \column{0.3\textwidth}
+            Différents types de tests peuvent être identifiés.
+            La classification la plus classique étant la suivante\footnotemark :
+            \column{0.7\textwidth}
+            \centering
+            \includegraphics[width=7cm]{image/classic-test-pyramid.png}
+        \end{columns}
+        \bigbreak
+        \footnotetext{OPENCLASSROOMS, Testez votre code Java pour réaliser des applications de qualité, \url{https://openclassrooms.com/fr/courses/6100311-testez-votre-code-java-pour-realiser-des-applications-de-qualite/6616481-decouvrez-les-tests-dintegration-et-les-tests-fonctionnels}}
+        Mais d'autres valent le coup d'être découvertes...
+
+    \end{frame}
 
     \begin{frame}
         \transdissolve
@@ -413,7 +429,7 @@ def customer_without_table():
         Si préparer les conditions initiales, le setup, prend du temps, on évitera si possible de se répéter à chaque test avec les scopes \lstinline{module} \lstinline{session}.
     \end{frame}
 
-    \begin{frame}[fragile]
+    \begin{frame}
         \frametitle{Pytest}
         \framesubtitle{\lstinline{Le conftest.py}}
         \transdissolve
@@ -472,7 +488,7 @@ TOTAL                      9      0   100%
 
     \end{frame}
 
-    \begin{frame}[fragile]
+    \begin{frame}
         \frametitle{Pytest}
         \framesubtitle{Le coverage}
         \transdissolve
@@ -483,11 +499,13 @@ TOTAL                      9      0   100%
             \includegraphics[width=5cm]{image/html-coverage.png}
             \column{0.5\textwidth}
             L'option \lstinline{--cov-report=html} permet de générer un rapport HTML plus détaillé qui met en lumière quelles parties du code sont couvertes par les tests et lesquelles ne le sont pas.
+            \bigbreak
+            \textbf{Exercice} : Trouvez quel test du module \url{https://github.com/St-Michel-IT/testing/blob/main/test_customer_database.py} couvre quelle partie de ce code:
         \end{columns}
 
     \end{frame}
 
-    \begin{frame}[fragile]
+    \begin{frame}
         \frametitle{Pytest}
         \framesubtitle{Le secret de la réussite}
         \transdissolve
@@ -507,6 +525,18 @@ TOTAL                      9      0   100%
             \includegraphics[width=3cm]{image/girl-rtfm.png}
         \end{columns}
 
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Pytest}
+        \framesubtitle{Travaux dirigés sur les tests unitaires}
+        \transdissolve
+        Les tests unitaires peuvent-être défini comme ceux testant les classes et fonctions d'une seule librairie.
+
+        Exemple de la librairie du repo \url{https://github.com/St-Michel-IT/testing/}, le module \lstinline{customer_database.py} testé par \lstinline{test_customer_database.py} est donc un exemple de tests unitaires.
+        \bigbreak
+        \textbf{Exercice} : Toujours dans le même repo, le module \lstinline{witness_number.py} est un début implémentation d'une généralisation du petit théorème de Fermat expliquée sur la chaîne Youtube Numberphile par Matt Parker\footnote{Numberphile, Witness Numbers (and the truthful 1,662,803), \url{https://www.youtube.com/watch?v=_MscGSN5J6o}}.
+        Cette librairie n'est pas déjà libre sur le web, finissons son développement avec des standards de qualité élevés grâce à nos connaissances en testing.
     \end{frame}
 
 \end{document}

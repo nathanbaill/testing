@@ -48,3 +48,20 @@ options of the Arduino environment. See the [IDE installation procedure on the A
 
 Open the `arduino/arduino.ino` file with Arduino IDE and upload it to the board.
 At the point the test `test_arduino.py` should pass.
+
+## Build the documentation
+
+This README is just a help, the complete documentation is available in the `doc` folder as a LaTex source.
+To build it to a PDF it required `LuaLaTex`.
+Does dependencies can be installed on Ubuntu with the following command :
+
+```bash
+
+sudo apt install texlive-luatex
+```
+
+Then build the PDF documentation :
+
+```bash
+lualatex -file-line-error -interaction=nonstopmode -synctex=1 -output-format=pdf -output-directory=/home/chrichri/Documents/Campus-St-Michel-IT/testing/doc/build/pdf Tests-Logiciels-Master-MS2D.tex
+```
