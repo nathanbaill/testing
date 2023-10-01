@@ -469,7 +469,7 @@ def customer_without_table():
         Pour appeler le plugin, il faut passe en argument le module à tester et le(s) test(s) de ce dernier.
 
 
-        \begin{lstlisting}[language=sh]
+        \begin{lstlisting}
 pytest --cov=\textcolor{flatgreen}{customer_database} ./test_customer_database.py
 ...
 rootdir: /home/chrichri/Documents/Campus-St-Michel-IT/testing
@@ -537,6 +537,56 @@ TOTAL                      9      0   100%
         \bigbreak
         \textbf{Exercice} : Toujours dans le même repo, le module \lstinline{witness_number.py} est un début implémentation d'une généralisation du petit théorème de Fermat expliquée sur la chaîne Youtube Numberphile par Matt Parker\footnote{Numberphile, Witness Numbers (and the truthful 1,662,803), \url{https://www.youtube.com/watch?v=_MscGSN5J6o}}.
         Cette librairie n'est pas déjà libre sur le web, finissons son développement avec des standards de qualité élevés grâce à nos connaissances en testing.
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Tests avec langage naturel}
+        \framesubtitle{A.K.A le BDD}
+        \transdissolve
+
+        \begin{dangercolorbox}
+            Les slides qui suivent sont truffés de biais négatifs sur le BDD suite à de mauvaises expériences \emoji{grinning-face-with-sweat}.
+
+        \end{dangercolorbox}
+        Le BDD est le sigle de Behavior-Driven Development.
+                \begin{columns}
+            \column{0.7\textwidth}
+            Vous remarquerez qu'il n'y ici aucune mention liée au testing?
+
+            Alors pourquoi est-il régulièrement associé au testing ?
+            \column{0.3\textwidth}
+            \centering
+            \includegraphics[width=3cm]{image/funny-drawing-of-a-cucumber}
+        \end{columns}
+        Parce que le BDD est un outil de communication entre les développeurs et les métiers qui permet à ceux qui spécifient le produit de le décrire par rapport au comportement (behavior) attendu.
+        Le tout dans une syntaxe proche du langage naturel.
+        Ce langage peut être utilisé pour générer des tests.
+        On pourrait presque finir par croire que le métier peut écrire les tests.
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \frametitle{Spécifier avec le BDD}
+        \framesubtitle{Exemple de Cucumber, le plus répandu}
+        \transdissolve
+        Développé en début des années 2000 par Daniel Terhorst-North, il fait entre autre le constat que : \textquote{Behaviour} is a more useful word than \textquote{test}\footnote{Daniel Terhorst-North, Introducing BDD, \url{https://dannorth.net/introducing-bdd/}}.
+        \bigbreak
+        Il utilise les mots clés \textquote{Given}, \textquote{When} et \textquote{Then} pour décrire le comportement attendu du produit en développement dans un scénario.
+        \begin{lstlisting}
+Given some initial context (the givens),
+When an event occurs,
+Then ensure some outcomes.
+        \end{lstlisting}
+
+        Par exemple :
+        \begin{lstlisting}
+Given I just openned a new private window in my browser
+When I browse the https://in-france.fr website
+Then I wan to descover the french economy by activity
+And by region.
+        \end{lstlisting}
+
+        On comprend facilement que ce sont des critères d'acceptation haut niveau.
+        Les tests liés seront donc des tests d'acceptation/fonctionnels.
     \end{frame}
 
 \end{document}
