@@ -4,6 +4,32 @@ Saint Michel Annecy, IT Campus, testing for L3 CSI and Master MS2D.
 It covers many aspects of modern software testing, from unit tests to, integration test, embedded development testing,
 etc
 
+## Official skills to acquire
+
+* Savoir développer et mettre en place des tests unitaires sur une application
+* Savoir développer et mettre en place des tests d’intégration sur une application
+* Savoir configurer un pipeline d’intégration continue sur une application
+
+## The official program
+
+1. Les tests unitaires
+    * Qu’est-ce qu’un test ?
+    * Les tests unitaires
+    * Les bonnes pratiques
+    * Le Test Driven Development
+    * Le code coverage
+    * Tests avec langage naturel
+
+2. Les tests d’intégrations
+    * Les tests d’intégration
+    * Le fonctionnement
+    * Les bonnes pratiques
+
+3. L’intégration continue
+    * Mise en place d’une plateforme d’intégration continue (GitLab CI)
+    * Conteneurisation d’une application (API)
+    * Configuration d’un pipeline de tests
+
 ## Testing using Pytest
 
 Pytest means Python, it's a framework to test Python using Python.
