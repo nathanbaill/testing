@@ -1,25 +1,23 @@
 // Install the library from the Arduino IDE library manager
 #include <simpleRPC.h>
 
-void setup()
-{
+void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
 }
 
-void loop()
-{
+void loop() {
   // put your main code here, to run repeatedly:
   interface(
-      Serial,
-      floatDivision,
-      "floatDivision: Divide the dividend by the divisor. @dividend: float, the dividend. @divisor: float, the dividend.",
-      doubleDivision,
-      "doubleDivision: Divide the dividend by the divisor. @dividend: double, the dividend. @divisor: double, the dividend.",
-      longOverflow,
-      "longOverflow: Add an unsigned long to the biggest unsigned long 4294967295.  @toAdd: unsigned long, value to add.",
-      isBufferOverflow,
-      "isBufferOverflow: Try a possible buffer overflow on the Arduino. @input: Array of bytes. @return: A boolean as flag of probable overflow.");
+    Serial,
+    floatDivision,
+    "floatDivision: Divide the dividend by the divisor. @dividend: float, the dividend. @divisor: float, the dividend.",
+    doubleDivision,
+    "doubleDivision: Divide the dividend by the divisor. @dividend: double, the dividend. @divisor: double, the dividend.",
+    longOverflow,
+    "longOverflow: Add an unsigned long to the biggest unsigned long 4294967295.  @toAdd: unsigned long, value to add.",
+    isBufferOverflow,
+    "isBufferOverflow: Try a possible buffer overflow on the Arduino. @input: Array of bytes. @return: A boolean as flag of probable overflow.");
   // Not much to to after that
 }
 
@@ -33,8 +31,7 @@ void loop()
  * @param divisor: float, the divisor.
  * @return float, the result of the division.
  */
-float floatDivision(float dividend, float divisor)
-{
+float floatDivision(float dividend, float divisor) {
   float result = dividend / divisor;
   return result;
 }
@@ -50,8 +47,7 @@ float floatDivision(float dividend, float divisor)
  * @param divisor: double, the divisor.
  * @return double, the result of the division.
  */
-double doubleDivision(double dividend, double divisor)
-{
+double doubleDivision(double dividend, double divisor) {
   double result = dividend / divisor;
   return result;
 }
@@ -66,8 +62,7 @@ double doubleDivision(double dividend, double divisor)
  * @param toAdd: An unsigned long to add to 4294967295.
  * @return unsigned long double, the result of the addition.
  */
-unsigned long longOverflow(unsigned long toAdd)
-{
+unsigned long longOverflow(unsigned long toAdd) {
   long result = 4294967295;
   result = toAdd + result;
   return result;
@@ -83,24 +78,19 @@ unsigned long longOverflow(unsigned long toAdd)
  * @param byte: Array of bytes.
  * @return A boolean as flag of probable overflow.
  */
-bool isBufferOverflow(byte input[])
-{
-  char buff[16] = {0};
+bool isBufferOverflow(byte input[]) {
+  char buff[16] = { 0 };
   // How and when this variable can be modified?
-  uint8_t unlocked_flags[32] = {0};
+  uint8_t unlocked_flags[32] = { 0 };
 
   // Loop over the input using a for loop
-  for (int i = 0; i < sizeof(input); i++)
-  {
+  for (int i = 0; i < sizeof(input); i++) {
     buff[i] = input[i];
   }
 
-  if (unlocked_flags[0])
-  {
+  if (unlocked_flags[0]) {
     return true;
-  }
-  else
-  {
+  } else {
     return false;
   }
 }

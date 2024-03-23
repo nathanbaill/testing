@@ -75,9 +75,8 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
     \section{Programme du module}
     \begin{frame}
         \frametitle{Tests Logiciels}
-        \framesubtitle{Le programme des 3 jours du module}
+        \framesubtitle{Compétences acquises aucours des 3 jours du module}
         \transdissolve
-        Compétences :
         \begin{itemize}
             \item Savoir développer et mettre en place des tests unitaires sur une application.
 
@@ -94,11 +93,11 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
         \frametitle{Tests Logiciels}
         \framesubtitle{Le programme des 3 jours du module}
         \transdissolve
-        Programme :
+        Programme~:
         \begin{enumerate}
             \item Les tests unitaires
             \begin{itemize}
-                \item Qu’est-ce qu’un test ?
+                \item Qu’est-ce qu’un test~?
                 \item Les tests unitaires
                 \item Les bonnes pratiques
                 \item Le Test Driven Development
@@ -136,7 +135,7 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
 
                 \item Directeur technique et associé d’\href{https://in-france.fr}{In France}.
 
-                \item Passionné !
+                \item Passionné~!
                 \bigbreak
                 \begin{columns}
                     \column{0.5\textwidth}
@@ -156,38 +155,69 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
 
     \section{Généralités}
     \begin{frame}
-        \frametitle{Qu’est-ce qu’un test ?}
+        \transdissolve
+        \frametitle{L'histoire du testing}
+
+        \begin{itemize}
+
+            \item ISTQB, l'International Software Testing Qualifications Board a été fondée en 1998\footnote{ISTQB, About Us, \url{https://www.istqb.org/about-us/who-we-are}}
+            \item Dans son livre Extreme Programming Explained, Kent Beck parle de Test-first Programming en 1999
+            \item Les standards modernes datent de la fin des années 90, début des années 2000
+            \item JUnit, le framework de test le plus utilisé en Java date de 2002\footnote{Steven J Zeil, Unit Testing Frameworks, \url{https://www.cs.odu.edu/~zeil/cs350/latest/Public/junit/index.html}}
+            \item Début du BDD (Behavior-Driven Development) avec JBehave, censé remplacer JUnit en utilisant le behavior au lieu de test, date de 2003\footnote{Cucumber, \url{https://cucumber.io/docs/bdd/history/}}
+        \end{itemize}
+
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Qu’est-ce qu’un test~?}
         \framesubtitle{Définition de l'International Software Testing Qualifications Board et IBM}
         \transdissolve
-        L’ISTQB définit les termes suivants dans son glossaire\footnote{ISTQB, Glossaire des termes utilisés en tests de logiciels, \url{https://www.cftl.fr/wp-content/uploads/2018/10/Glossaire-des-tests-logiciels-v3_2F-ISTQB-CFTL-1.pdf}} :
+        L’ISTQB définit les termes suivants dans son glossaire\footnote{ISTQB, Glossaire des termes utilisés en tests de logiciels, \url{https://www.cftl.fr/wp-content/uploads/2018/10/Glossaire-des-tests-logiciels-v3_2F-ISTQB-CFTL-1.pdf}}~:
 
-        \textbf{Test :} Un ensemble d’un ou plusieurs cas
+        \textbf{Test~:} Un ensemble d’un ou plusieurs cas
         de tests.
 
-        \textbf{Cas de test :} Un ensemble de conditions
+        \textbf{Cas de test~:} Un ensemble de conditions
         préalables, de données d'entrée, d'actions
         (le cas échéant), de résultats attendus et
         de postconditions, élaboré sur la base des
         conditions de test.
         \bigbreak
-        Selon IBM\footnote{IBM, Qu'est-ce que le test logiciel ?, \url{https://www.ibm.com/fr-fr/topics/software-testing}} :
+        Selon IBM\footnote{IBM, Qu'est-ce que le test logiciel~?, \url{https://www.ibm.com/fr-fr/topics/software-testing}}~:
 
         \textquote{Le test logiciel est le processus qui consiste à évaluer et à vérifier qu'un produit ou une application logicielle fait ce qu'il ou elle est censé(e) faire.}
     \end{frame}
 
     \begin{frame}
-        \frametitle{Histoire du test logiciel moderne}
+        \frametitle{Qu’est-ce qu’un test unitaire~?}
+        \framesubtitle{Définition de la taverne du testeur\footnote{Mais c’est quoi un test unitaire~?, \url{https://latavernedutesteur.fr/2018/04/11/mais-cest-quoi-un-test-unitaire/}}}
         \transdissolve
+        Il obéit au principe \textquote{F.I.R.S.T.}~:
         \begin{itemize}
-            \item ISTQB, l’International Software Testing Qualifications Board a été fondée en 1998.\footnote{ISTQB, About Us, \url{https://www.istqb.org/about-us/who-we-are}}
+            \item \textbf{Fast~:} S’exécute rapidement et est donc automatisé
+            \item \textbf{Isolated~:} Est indépendant des facteurs externes et des autres tests
+            \item \textbf{Repeatable~:} Isole les bugs automatiquement
+            \item \textbf{Self-validating (autonome)~:} N’est pas ambiguë (pas sujet à interprétation, ne demande pas une action manuelle pour vérifier le résultat)
+            \item \textbf{Timely (tôt)~:} Écrit en même temps que le code (même avant en TDD)
+        \end{itemize}
+        Si le test échappe à un de ces principes, il n'est probablement pas unitaire.
+        \bigbreak
+        Pour isoler les bugs automatiquement, un test unitaire doit tester le code unitairement, et isolement.
+        Il doit donc être écrit dans le but de tester la logique d’une ligne de code, et quasiment si un test unitaire échoue vous pouvez connaitre la ligne de code incriminée.
+    \end{frame}
 
-            \item Dans son livre Extreme Programming Explained, Kent Beck parle de \textquote{Test-first Programming} en 1999.
-
-            \item Les standards modernes datent de la fin des années 90, début des années 2000.
-
-            \item JUnit, le framework de test le plus utilisé en Java date de 2002.\footnote{Steven J. Zeil, Unit Testing Frameworks, \url{https://www.cs.odu.edu/~zeil/cs350/latest/Public/junit/index.html}}
-
-            \item Début du BDD (Behavior-Driven Development) avec JBehave, censé remplacer JUnit en utilisant le behavior au lieu de test, date de 2023.\footnote{Cucumber, \url{https://cucumber.io/docs/bdd/history/}}
+    \begin{frame}
+        \transdissolve
+        \frametitle{Testing, les frameworks de test unitaire}
+        \begin{itemize}
+            \item UnitTest, le framework de test standard de Python
+            \item PyTest, un framework pour tout faire en Python
+            \item JUnit, le framework de test le plus utilisé en Java
+            \item PHPUnit, le framework de test standard de PHP
+            \item Google Test, pour le C++
+            \item Jest pour JS, Babel, pour TypeScript, Node, React, Angular, Vue et plus encore
+            \item etc
         \end{itemize}
     \end{frame}
 
@@ -197,7 +227,7 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
         \begin{columns}
             \column{0.3\textwidth}
             Différents types de tests peuvent être identifiés.
-            La classification la plus classique étant la suivante\footnotemark :
+            La classification la plus classique étant la suivante\footnotemark~:
             \column{0.7\textwidth}
             \centering
             \includegraphics[width=7cm]{image/classic-test-pyramid.png}
@@ -210,17 +240,39 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
 
     \begin{frame}
         \transdissolve
+        \frametitle{Testing}
+
+        \begin{itemize}
+
+            \item Un programme a pour entrée le standard input, et sorties les standard output et standard error, ce sont les standard streams
+            \item Un programme se termine avec un code retour, le plus souvent un entier différent de 0 en cas de problème
+            \item Les frameworks de tests retournent 3 statuts, OK, FAILED et ERROR
+            \item Les OK si aucune erreur n'a lieu et FAILED en cas d'erreur d'assertion
+
+        \end{itemize}
+
+        \bigbreak
+
+        \centering
+        \includegraphics[width=7cm]{image/terminal-test-report.png}
+
+    \end{frame}
+
+    \begin{frame}
+        \transdissolve
         \frametitle{Brief sur les outils de test logiciel}
         \begin{itemize}
             \item Les frameworks de test retournent 3 statuts, OK, FAILED et ERROR.
 
             \item OK si aucune erreur n’a lieu et FAILED en cas d’erreur d’assertion, \lstinline{AssertionError} en Python et Java.
 
-            \item Pas de standard universellement accepté mais un format domine, le XML JUnit. Un XML le définit par la grammaire \url{https://windyroad.com.au/dl/Open\%20Source/JUnit.xsd}.
+            \item Pas de standard universellement accepté mais un format domine, le XML JUnit.
+            Un XML le définit par la grammaire \url{https://windyroad.com.au/dl/Open\%20Source/JUnit.xsd}.
 
             \item Vient de l’écosystème Java avec le package du même nom, JUnit, mais est présent dans la plupart des frameworks de test comme PHPUnit, Pytest.
 
-            \item L’interopérabilité entre les outils est permise par cette XSD commune, mais pas plus de contrainte. Par exemple, l’interopérabilité entre les frameworks de test et les outils de CI/CD.
+            \item L’interopérabilité entre les outils est permise par cette XSD commune, mais pas plus de contrainte.
+            Par exemple, l’interopérabilité entre les frameworks de test et les outils de CI/CD.
 
             \item Certains outils, souvent des solutions propriétaires, rechignent toujours à exporter un JUnit contenant les résultats de test pour fermer leur environnement.
 
@@ -233,7 +285,8 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
         \framesubtitle{En Python}
         \transdissolve
         L’instruction \lstinline{assert} vérifie une condition.
-        Si la condition est vraie, cela ne fait rien et votre programme continue simplement à s’exécuter. Mais si la condition d’assertion est fausse, elle lève une exception \lstinline{AssertionError}.
+        Si la condition est vraie, cela ne fait rien et votre programme continue simplement à s’exécuter.
+        Mais si la condition d’assertion est fausse, elle lève une exception \lstinline{AssertionError}.
         \begin{lstlisting}[language=Python]
 assert 23 % 2 == 0, "Le restant de la division est différent de 0"
         \end{lstlisting}
@@ -246,8 +299,6 @@ AssertionError: Le restant de la division est différent de 0
         \end{lstlisting}
     \end{frame}
 
-
-    \section{Pytest}
     \begin{frame}
         \frametitle{Pourquoi Pytest pour le testing}
         \transdissolve
@@ -272,10 +323,11 @@ AssertionError: Le restant de la division est différent de 0
         \begin{itemize}
             \item Un module de test Pytest est un module Python préfixé par \lstinline{test_}.
 
-            \item Toutes les méthodes préfixées par \lstinline{test_} sont exécutées par Pytest. Qu'elles soient
-            dans une classe ou non. Les autres méthodes ne sont pas exécutées sauf si les tests ne les appellent.
+            \item Toutes les méthodes préfixées par \lstinline{test_} sont exécutées par Pytest.
+            Qu'elles soient dans une classe ou non.
+            Les autres méthodes ne sont exécutées uniquement si les tests les appellent.
         \end{itemize}
-        Ici par exemple, la précédente assertion est intégrées dans une méthode nommée \lstinline{test_divide} dans le module de test \lstinline{test_division.py}.
+        Ici par exemple, la précédente assertion est intégrée dans une méthode nommée \lstinline{test_divide} dans le module de test \lstinline{test_division.py}.
         \begin{lstlisting}[language=Python]
 def test_divide():  # Un test Pytest est préfixé par test_
     assert 23 % 2 == 0, "Le restant de la division est différent de 0."
@@ -311,7 +363,8 @@ test_divison.py:2: AssertionError
 
         Ils permettent de tester plusieurs cas avec un seul test.
 
-        Le rapport génère un cas de test par paramètre. Il est donc plus détaillé et permet de trouvé
+        Le rapport génère un cas de test par paramètre.
+        Il est donc plus détaillé et permet de trouvé
         les tests en échec plus facilement que si l'\lstinline {assert} était dans une boucle, ce qui ne donne qu'un statut OK ou Fail dans le rapport.
         \begin{lstlisting}[language=Python]
 import pytest
@@ -326,17 +379,18 @@ def test_divide_from_0_to_99(dividend):  # Doit avoir un argument présent dans 
         \frametitle{Pytest}
         \framesubtitle{Les tests paramétriques}
         \transdissolve
-        Génère 100 cas de tests. Met en évidence les dividendes dont le restant de la division par 2 est différent de 0, ici 1 par exemple.
+        Génère 100 cas de tests.
+        Met en évidence les dividendes dont le restant de la division par 2 est différent de 0, ici 1 par exemple.
         \begin{lstlisting}[language=sh]
 collecting ... collected 100 items
 
 test_divison.py::test_divide_from_0_to_99[0] PASSED                      [  1%]
 test_divison.py::test_divide_from_0_to_99[1] FAILED                      [  2%]
 test_divison.py:7 (test_divide_from_0_to_99[1])
-1 != 0
+1~!= 0
 
-Expected :0
-Actual   :1
+Expected~:0
+Actual  ~:1
 <Click to see difference>
 
 dividend = 1
@@ -372,7 +426,8 @@ test_divison.py:14: ZeroDivisionError
         \end{lstlisting}
 
         \begin{dangercolorbox}
-            Pour éviter les faux négatifs, un test doit tendre, tant que faire se peut, vers un \lstinline{assert}. Pour cela pensez à utiliser les fonctions \lstinline{parametrize} et \lstinline{fixture}.
+            Pour éviter les faux négatifs, un test doit tendre, tant que faire se peut, vers un \lstinline{assert}.
+            Pour cela pensez à utiliser les fonctions \lstinline{parametrize} et \lstinline{fixture}.
         \end{dangercolorbox}
     \end{frame}
 
@@ -407,15 +462,42 @@ def test_instantiation(customer_without_table):
 
     \begin{frame}[fragile]
         \frametitle{Pytest}
+        \framesubtitle{Les fixtures, le moyen du pattern A.A.A\footnote{Arrange-Act-Assert: A Pattern for Writing Good Tests\url{https://automationpanda.com/2020/07/07/arrange-act-assert-a-pattern-for-writing-good-tests/}}}
+        \transdissolve
+        Le pattern du A.A.A, Arrange, Act, Assert, est facile à implémenter avec les fixtures.
+        Arrange et Act sont isolé dans la fixture, Assert seul est dans le test.
+
+        \begin{lstlisting}[language=Python]
+def customer_without_table():
+    """...
+    """
+    customer = Customer()  # Arrange et Act dans le setup avant yiel ou return
+    yield customer
+    customer.con.close()  # Pas de nom en A, ils l'ont oublié?
+        \end{lstlisting}
+        Le test tend vers un \lstinline{assert} quasi seul.
+        \begin{lstlisting}[language=Python]
+def test_instantiation(customer_without_table):
+    """...
+    """
+    assert isinstance(customer_without_table.con, Connection) # Assert
+        \end{lstlisting}
+        Le B.D.D. suit le pattern A.A.A sous un autre nom : Given-When-Then.
+        Le langage Gherkin utilise les étapes Given-When-Then pour spécifier les comportements dans les scénarios.
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \frametitle{Pytest}
         \framesubtitle{Le scope des fixtures}
         \transdissolve
         L'argument \lstinline{scope} du décorateur \lstinline{pytest.fixture} défini la durée de vie
-        de la fixture. Il peut prendre 3 valeurs :
+        de la fixture.
+        Il peut prendre 3 valeurs~:
         \begin{itemize}
-            \item \lstinline{function} : La valeur par défaut si on ne met rien.
+            \item \lstinline{function}~: La valeur par défaut si on ne met rien.
             La fixture est exécutée à chaque fonction de test \lstinline{def test_...} qui l'appelle directement ou indirectement, donc les éventuels setup et teardown de cette dernière aussi.
-            \item \lstinline{module} : Une fois par module \lstinline{test_....py}.
-            \item \lstinline{session} : Une seule fois durant la session de test quel que soit le nombre de modules et de tests exécutés.
+            \item \lstinline{module}~: Une fois par module \lstinline{test_....py}.
+            \item \lstinline{session}~: Une seule fois durant la session de test quel que soit le nombre de modules et de tests exécutés.
         \end{itemize}
         \begin{lstlisting}[language=Python]
 @pytest.fixture(scope="function")  # Scope de la fixture, par default function
@@ -426,7 +508,7 @@ def customer_without_table():
 
         Pour tester une API en étant sûr le token n'est pas périmé, on peut utiliser le scope \lstinline{function} pour en avoir un nouveau à chaque appel.
 
-        Si préparer les conditions initiales, le setup, prend du temps, on évitera si possible de se répéter à chaque test avec les scopes \lstinline{module} \lstinline{session}.
+        Si préparer les conditions initiales, le setup, prend du temps, on évitera si possible de le répéter à chaque test avec les scopes \lstinline{module}, \lstinline{session}.
     \end{frame}
 
     \begin{frame}
@@ -435,7 +517,7 @@ def customer_without_table():
         \transdissolve
         Il n'a qu'une seule particularité, c'est d'être importé automatiquement par Pytest lorsqu'il est présent dans le dossier courant des tests.
 
-        Il permet de factoriser les fixtures et les paramétrages de tests utilisés dans plusieurs modules de tests, car ces derniers seront automatiquement disponible sans même un import dans le module.
+        Il permet de factoriser les fixtures et les paramétrages de tests utilisés dans plusieurs modules de tests, car ces derniers seront automatiquement disponibles sans même un import dans le module.
         \begin{columns}
             \column{0.5\textwidth}
             \dirtree{%
@@ -466,10 +548,10 @@ def customer_without_table():
         \transdissolve
         Pas de support natif du coverage par Pytest, il faut installer le plugin \lstinline{pytest-cov}\footnote{Welcome to pytest-cov’s documentation!, \url{https://pytest-cov.readthedocs.io/en/latest/}}.
 
-        Pour appeler le plugin, il faut passe en argument le module à tester et le(s) test(s) de ce dernier.
+        Pour appeler le plugin, il faut passer en argument le module à tester et le(s) test(s) de ce dernier.
 
 
-        \begin{lstlisting}
+        \begin{lstlisting}[language=sh]
 pytest --cov=\textcolor{flatgreen}{customer_database} ./test_customer_database.py
 ...
 rootdir: /home/chrichri/Documents/Campus-St-Michel-IT/testing
@@ -500,7 +582,7 @@ TOTAL                      9      0   100%
             \column{0.5\textwidth}
             L'option \lstinline{--cov-report=html} permet de générer un rapport HTML plus détaillé qui met en lumière quelles parties du code sont couvertes par les tests et lesquelles ne le sont pas.
             \bigbreak
-            \textbf{Exercice} : Trouvez quel test du module \url{https://github.com/St-Michel-IT/testing/blob/main/test_customer_database.py} couvre quelle partie de ce code:
+            \textbf{Exercice}~: Trouvez quel test du module \url{https://github.com/St-Michel-IT/testing/blob/main/test_customer_database.py} couvre quelle partie de ce code:
         \end{columns}
 
     \end{frame}
@@ -519,12 +601,11 @@ TOTAL                      9      0   100%
 
             La liste des fonctionnalités est trop longue, nous venons juste d'en découvrir les principales.
             \bigbreak
-            Donc une fois encore, comme pour toutes les bonnes libraires à connaître, le secret est \textquote{\textbf{\Large{RTFM}}} !
+            Donc une fois encore, comme pour toutes les bonnes libraires à connaître, le secret est \textquote{\textbf{\Large{RTFM}}}~!
             \column{0.3\textwidth}
             \centering
             \includegraphics[width=3cm]{image/girl-rtfm.png}
         \end{columns}
-
     \end{frame}
 
     \begin{frame}
@@ -535,7 +616,7 @@ TOTAL                      9      0   100%
 
         Exemple de la librairie du repo \url{https://github.com/St-Michel-IT/testing/}, le module \lstinline{customer_database.py} testé par \lstinline{test_customer_database.py} est donc un exemple de tests unitaires.
         \bigbreak
-        \textbf{Exercice} : Toujours dans le même repo, le module \lstinline{witness_number.py} est un début implémentation d'une généralisation du petit théorème de Fermat expliquée sur la chaîne Youtube Numberphile par Matt Parker\footnote{Numberphile, Witness Numbers (and the truthful 1,662,803), \url{https://www.youtube.com/watch?v=_MscGSN5J6o}}.
+        \textbf{Exercice}~: Toujours dans le même repo, le module \lstinline{witness_number.py} est un début implémentation d'une généralisation du petit théorème de Fermat expliquée sur la chaîne Youtube Numberphile par Matt Parker\footnote{Numberphile, Witness Numbers (and the truthful 1,662,803), \url{https://www.youtube.com/watch?v=_MscGSN5J6o}}.
         Cette librairie n'est pas déjà libre sur le web, finissons son développement avec des standards de qualité élevés grâce à nos connaissances en testing.
     \end{frame}
 
@@ -549,11 +630,11 @@ TOTAL                      9      0   100%
 
         \end{dangercolorbox}
         Le BDD est le sigle de Behavior-Driven Development.
-                \begin{columns}
+        \begin{columns}
             \column{0.7\textwidth}
             Vous remarquerez qu'il n'y ici aucune mention liée au testing?
 
-            Alors pourquoi est-il régulièrement associé au testing ?
+            Alors pourquoi est-il régulièrement associé au testing~?
             \column{0.3\textwidth}
             \centering
             \includegraphics[width=3cm]{image/funny-drawing-of-a-cucumber}
@@ -568,7 +649,7 @@ TOTAL                      9      0   100%
         \frametitle{Spécifier avec le BDD}
         \framesubtitle{Exemple de Cucumber, le plus répandu}
         \transdissolve
-        Développé en début des années 2000 par Daniel Terhorst-North, il fait entre autre le constat que : \textquote{Behaviour} is a more useful word than \textquote{test}\footnote{Daniel Terhorst-North, Introducing BDD, \url{https://dannorth.net/introducing-bdd/}}.
+        Développé en début des années 2000 par Daniel Terhorst-North, il fait entre autre le constat que~: \textquote{Behaviour} is a more useful word than \textquote{test}\footnote{Daniel Terhorst-North, Introducing BDD, \url{https://dannorth.net/introducing-bdd/}}.
         \bigbreak
         Il utilise les mots clés \textquote{Given}, \textquote{When} et \textquote{Then} pour décrire le comportement attendu du produit en développement dans un scénario.
         \begin{lstlisting}
@@ -577,7 +658,7 @@ When an event occurs,
 Then ensure some outcomes.
         \end{lstlisting}
 
-        Par exemple :
+        Par exemple~:
         \begin{lstlisting}
 Given I just openned a new private window in my browser
 When I browse the https://in-france.fr website
