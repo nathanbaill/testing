@@ -38,4 +38,15 @@ class Customer:
             ) VALUES (
                 ?, ?
             )""", (customer_id, email))
+        
+     def update(self, customer_id: int, email: str) -> None:
+        """
+        Update a customer in the table.
+
+           :param customer_id: The customer id as an int
+           :param email: The customer email as a string
+        """
+        self.con.execute("""
+            UPDATE customer SET customer_id = `?` & email = `?` WHERE `id` = id
+            )""", (customer_id, email))
         self.con.commit()
