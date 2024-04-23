@@ -38,4 +38,19 @@ class Customer:
             ) VALUES (
                 ?, ?
             )""", (customer_id, email))
+
+    def delete(self, customer_id: int, email: str) -> None:
+        """
+        Delete a customer in the table.
+
+           :param customer_id: The customer id as an int
+           :param email: The customer email as a string
+        """
+        self.con.execute("""
+            DELETE FROM `customer` (
+                customer_id,
+                email
+            ) WHERE `id` = id & `email` = email 
+            """, (customer_id, email))
+        
         self.con.commit()
