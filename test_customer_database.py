@@ -1,4 +1,5 @@
 from sqlite3 import IntegrityError, Connection
+import sqlite3
 
 import pytest
 
@@ -95,5 +96,26 @@ def test_customer_email_cannot_be_null(customer_with_table):
 
        :param customer_with_table: Fixture of a newly created empty table.
     """
+    with pytest.raises(IntegrityError):
+        customer_with_table.insert(1, None)
+
+def test_update_email(customer_with_table):
+    """
+    Test the update email from the customer.
+
+       :param customer_with_table: Fixture of a newly created empty table.
+    """
+    try:
+        customer_with_table.update(1, "nathanbai@hotmail.fr")
+    except Exception as e:
+        pytest.fail("The customer insertion failed: %s" % e)
+
+def test_insert_invalid_email(customer_with_table):
+    """
+    Test the customer email cannot be NULL.
+
+       :param customer_with_table: Fixture of a newly created empty table.
+    """
+        # Vérifier que l'insertion d'un client avec une adresse e-mail invalide échoue
     with pytest.raises(IntegrityError):
         customer_with_table.insert(1, None)
