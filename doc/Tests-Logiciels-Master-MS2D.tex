@@ -1,56 +1,11 @@
 \documentclass{beamer}
-
-% Style
-\usepackage{xcolor}
-
-\usetheme{Madrid}
-\usepackage{dirtree}
-% Color
-\definecolor{flatblue}{RGB}{106, 137, 204}
-\usecolortheme[named=flatblue]{structure}
-% Font
-\usepackage{emoji}
-\usepackage{fontspec}
-\usepackage{csquotes}
-\setsansfont{EB Garamond}
-% Code
-\usepackage{listings}
-\usepackage{graphicx}
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=flatblue,
-    filecolor=flatblue,
-    urlcolor=flatblue,
-    citecolor=flatblue
-}
-\definecolor{flatgreen}{RGB}{0, 98, 102}
-\definecolor{flatgreyish}{RGB}{209, 216, 224}
-\lstset{
-    basicstyle=\ttfamily\scriptsize,
-    backgroundcolor=\color{flatgreyish},
-    keywordstyle=\color{flatgreen},        % Keywords font ('*' = uppercase)
-    commentstyle=\color{flatblue},         % Step between two line-numbers
-    columns=fullflexible,
-    breaklines=true
-}
-
-% Highlight
-\usepackage[most]{tcolorbox}
-\usepackage{amsmath}
-\definecolor{flatorange}{RGB}{255, 165, 2}
-\definecolor{flatred}{RGB}{255, 71, 87}
-\tcbset{textmarker/.style={%
-skin=enhancedmiddle jigsaw,breakable,parbox=false,
-boxrule=0mm,leftrule=2mm,rightrule=0mm,boxsep=0mm,arc=0mm,outer arc=0mm,
-left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
-\newtcolorbox{dangercolorbox}{textmarker,colback=flatorange,colframe=flatred}
+\include{./cours-style.sty}
 
 % Title
 \title{Tests Logiciels - Master MS2D}
 \author{Christophe Brun}
 \institute{Campus Saint-Michel IT}
-\date{21 septembre 2033}
+\date{21 septembre 2023}
 \beamertemplatenavigationsymbolsempty
 
 
@@ -72,7 +27,7 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
     \end{frame}
 
 
-    \section{Programme du module}
+    \section{Programme du module}\label{sec:programme-du-module}
     \begin{frame}
         \frametitle{Tests Logiciels}
         \framesubtitle{Compétences acquises aucours des 3 jours du module}
@@ -153,7 +108,7 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
     \end{frame}
 
 
-    \section{Généralités}
+    \section{Généralités}\label{sec:generalites}
     \begin{frame}
         \transdissolve
         \frametitle{L'histoire du testing}
@@ -189,6 +144,8 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
         \textquote{Le test logiciel est le processus qui consiste à évaluer et à vérifier qu'un produit ou une application logicielle fait ce qu'il ou elle est censé(e) faire.}
     \end{frame}
 
+
+    \section{Tests Unitaires}\label{sec:tests-unitaires}
     \begin{frame}
         \frametitle{Qu’est-ce qu’un test unitaire~?}
         \framesubtitle{Définition de la taverne du testeur\footnote{Mais c’est quoi un test unitaire~?, \url{https://latavernedutesteur.fr/2018/04/11/mais-cest-quoi-un-test-unitaire/}}}
@@ -234,7 +191,7 @@ left=1mm,right=1mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm}}
         \end{columns}
         \bigbreak
         \footnotetext{OPENCLASSROOMS, Testez votre code Java pour réaliser des applications de qualité, \url{https://openclassrooms.com/fr/courses/6100311-testez-votre-code-java-pour-realiser-des-applications-de-qualite/6616481-decouvrez-les-tests-dintegration-et-les-tests-fonctionnels}}
-        Mais d'autres valent le coup d'être découvertes...
+        Mais d'autres valent le coup d'être découvertes\ldots
 
     \end{frame}
 
@@ -341,14 +298,14 @@ def test_divide():  # Un test Pytest est préfixé par test_
         \transdissolve
         Lancer avec la commande \lstinline{python -m pytest test_divison.py}, Pytest affiche le rapport de test.
         \begin{lstlisting}[language=sh]
-...
+\ldots
 def test_divide():  # Un test Pytest est préfixé par test_
 >       assert 23 % 2 == 0, "Le restant de la division est différent de 0."
 E       AssertionError: Le restant de la division est différent de 0.
 E       assert (23 % 2) == 0
 
 test_divison.py:2: AssertionError
-...
+\ldots
         \end{lstlisting}
 
         De très utiles et nombreuses options peuvent compléter cette ligne de commande.
@@ -382,7 +339,7 @@ def test_divide_from_0_to_99(dividend):  # Doit avoir un argument présent dans 
         Génère 100 cas de tests.
         Met en évidence les dividendes dont le restant de la division par 2 est différent de 0, ici 1 par exemple.
         \begin{lstlisting}[language=sh]
-collecting ... collected 100 items
+collecting \ldots collected 100 items
 
 test_divison.py::test_divide_from_0_to_99[0] PASSED                      [  1%]
 test_divison.py::test_divide_from_0_to_99[1] FAILED                      [  2%]
@@ -454,7 +411,7 @@ def test_instantiation(customer_without_table):
     """
     assert isinstance(customer_without_table.con, Connection)
         \end{lstlisting}
-        En cas de plantage dans la fixture, i.e. avant ou après le test, la sanction
+        En cas de plantage dans la fixture, i.e., avant ou après le test, la sanction
         serait erreur et non échec.
 
         Le rapport reflétera fidèlement le test et sera exempt de faux négatif.
@@ -478,12 +435,27 @@ def customer_without_table():
         Le test tend vers un \lstinline{assert} quasi seul.
         \begin{lstlisting}[language=Python]
 def test_instantiation(customer_without_table):
-    """...
+    """\ldots
     """
     assert isinstance(customer_without_table.con, Connection) # Assert
         \end{lstlisting}
-        Le B.D.D. suit le pattern A.A.A sous un autre nom : Given-When-Then.
+        Le B.D.D.~suit le pattern A.A.A sous un autre nom : Given-When-Then.
         Le langage Gherkin utilise les étapes Given-When-Then pour spécifier les comportements dans les scénarios.
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Pytest}
+        \framesubtitle{Exercice, écrire un test avec une fixture}
+        \transdissolve
+        \textbf{Exercice~:} Écrivez votre premier test Pytest avec une fixture en respectant les exigences suivantes~:
+        \begin{itemize}
+            \item Le test doit utiliser une fixture avec setup et teardown.
+            \item Le test doit respect le pattern A.A.A~.
+        \end{itemize}
+        \bigbreak
+        Pour le setup et teardown, pensez à un fichier \emoji{winking-face}.
+        \bigbreak
+        Pour être évalué, créez un seul repo contenant tous les exercices de ce cours.
     \end{frame}
 
     \begin{frame}[fragile]
@@ -502,8 +474,7 @@ def test_instantiation(customer_without_table):
         \begin{lstlisting}[language=Python]
 @pytest.fixture(scope="function")  # Scope de la fixture, par default function
 def customer_without_table():
-    """
-    Connection to in memory database using the Customer class
+    """Connection to in memory database using the Customer class"""
         \end{lstlisting}
 
         Pour tester une API en étant sûr le token n'est pas périmé, on peut utiliser le scope \lstinline{function} pour en avoir un nouveau à chaque appel.
@@ -553,12 +524,12 @@ def customer_without_table():
 
         \begin{lstlisting}[language=sh]
 pytest --cov=\textcolor{flatgreen}{customer_database} ./test_customer_database.py
-...
+\ldots
 rootdir: /home/chrichri/Documents/Campus-St-Michel-IT/testing
 plugins: cov-4.1.0
 collected 6 items
 
-test_customer_database.py ......                                                                                                                                                                                                 [100%]
+test_customer_database.py \ldots\ldots                                                                                                                                                                                                 [100%]
 
 ---------- coverage: platform linux, python 3.11.4-final-0 -----------
 Name                   Stmts   Miss  Cover
@@ -612,14 +583,16 @@ TOTAL                      9      0   100%
         \frametitle{Pytest}
         \framesubtitle{Travaux dirigés sur les tests unitaires}
         \transdissolve
-        Les tests unitaires peuvent-être défini comme ceux testant les classes et fonctions d'une seule librairie.
-
-        Exemple de la librairie du repo \url{https://github.com/St-Michel-IT/testing/}, le module \lstinline{customer_database.py} testé par \lstinline{test_customer_database.py} est donc un exemple de tests unitaires.
+        \textbf{Exercice 1}~: Toujours à partir de la librairie du repo \url{https://github.com/St-Michel-IT/testing/}, où le module \lstinline{customer_database.py} est testé par \lstinline{test_customer_database.py}.
+        Ajoutez une méthode qui modifie les données d'un client et les tests qui vont avec.
         \bigbreak
-        \textbf{Exercice}~: Toujours dans le même repo, le module \lstinline{witness_number.py} est un début implémentation d'une généralisation du petit théorème de Fermat expliquée sur la chaîne Youtube Numberphile par Matt Parker\footnote{Numberphile, Witness Numbers (and the truthful 1,662,803), \url{https://www.youtube.com/watch?v=_MscGSN5J6o}}.
-        Cette librairie n'est pas déjà libre sur le web, finissons son développement avec des standards de qualité élevés grâce à nos connaissances en testing.
+        \textbf{Exercice 2}~: Toujours dans le même repo, le module \lstinline{witness_number.py} est un début implémentation d'une généralisation du petit théorème de Fermat expliquée sur la chaîne Youtube Numberphile par Matt Parker\footnote{Numberphile, Witness Numbers (and the truthful 1,662,803), \url{https://www.youtube.com/watch?v=_MscGSN5J6o}}.
+        Cette librairie n'est pas déjà libre sur le web.
+        Finissons son développement, en implémentant \textbf{toutes les fonctionnalités de la vidéo} de M. Parker avec des standards de qualité élevés grâce à nos connaissances en testing.
     \end{frame}
 
+
+    \section{Le BDD}\label{sec:le-bdd}
     \begin{frame}
         \frametitle{Tests avec langage naturel}
         \framesubtitle{A.K.A le BDD}
@@ -643,6 +616,20 @@ TOTAL                      9      0   100%
         Le tout dans une syntaxe proche du langage naturel.
         Ce langage peut être utilisé pour générer des tests.
         On pourrait presque finir par croire que le métier peut écrire les tests.
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Tests avec langage naturel}
+        \framesubtitle{Cucumber ne serait même pas un outil de test}
+        \transdissolve
+        Dans cette \href{https://news.ycombinator.com/item?id=10194242}{discussion sur Ycombinator}, le créateur de Cucumber affirme plusieurs choses intéressantes dont~:
+        \begin{itemize}
+            \item \textquote{The biggest problem with Cucumber is that most people trying it out don't understand what it is.}
+            \item \textquote{Cucumber is not a tool for testing software.}
+            \item \textquote{Cucumber is a tool that facilitates collaboration and software design (especially domain-driven design).}
+            \item \textquote{The purpose of Cucumber is to bridge the communication gap between business and IT by providing a small set of essential scenarios to illustrate core behaviour of unwritten software.}
+        \end{itemize}
+        Mais comme c'est au programme et que ça ne choque plus grand monde on va s'en servir d'outil de test quand même. \emoji{smiling-face-with-halo}
     \end{frame}
 
     \begin{frame}[fragile]
@@ -670,4 +657,55 @@ And by region.
         Les tests liés seront donc des tests d'acceptation/fonctionnels.
     \end{frame}
 
+    \begin{frame}
+        \frametitle{Spécifier avec le BDD}
+        \framesubtitle{Exemple de Cucumber\footnote{Given-When-Then pattern in unit tests, \url{https://www.j-labs.pl/blog-technologiczny/given-when-then-pattern-in-unit-tests/}}}
+        \transdissolve
+        \begin{columns}
+            \column{0.5\textwidth}
+            \centering
+            \includegraphics[width=6cm]{image/given-when-then.png}
+            \column{0.5\textwidth}
+            \centering
+            \includegraphics[width=6cm]{image/given-when-then-exemple.png}
+        \end{columns}
+        \textquote{And} peut être utilisé pour ajouter des conditions supplémentaires aux 3 mots clés précédents\footnote{Getting Started with BDD, \url{https://cucumber.io/blog/bdd/getting-started-with-bdd-part-1/}}.
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \frametitle{Spécifier avec le BDD}
+        \framesubtitle{Exemple de Cucumber, le plus répandu}
+        \transdissolve
+        Les données d'un test paramétrique sont définies dans un tableau\footnote{Given/When/Then And Example Tables Using the Robot Framework, \url{https://www-codecentric-de.translate.goog/wissens-hub/blog/givenwhenthen-and-example-tables-using-the-robot-framework?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=fr&_x_tr_pto=sc&_x_tr_hist=true}}.
+        \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+Example
+    [Arguments]  ${periodClosed}  ${periodOpenAndModified}  ${importDay}  ${oldManagerValidUntil}  ${newManagerValidFrom}
+
+    Given initialized criteria for bonus commercial
+    And a branch B with branch manager M_OLD and employee E1
+    And evaluation for E1 for period ${periodClosed} which is closed
+    And evaluation for E1 for period ${periodOpenAndModified} which is open and modified
+
+    When M_NEW becomes new manager of branch B
+    And import service is called on ${importDay}
+    Then the new branch manager of branch B is M_NEW valid from ${newManagerValidFrom}
+    And branch manager M_OLD manages employee E until ${oldManagerValidUntil}
+    And branch manager M_NEW manages employee E from ${newManagerValidFrom}
+    And Evaluations for E1 still have the same content
+
+| *Test Case* | | *Closed Period*        | *Open Period*          | *Run Import On* | *Old Manager Stops* | *New Manager Starts* |
+| 1 | Example   | 1.11.2009 - 30.11.2009 | 1.12.2009 - 31.12.2009 | 11.11.2009      | 30.11.2009          |  1.12.2009
+| 2 | Example   | 1.11.2009 - 30.11.2009 | 1.12.2009 - 31.12.2009 |  1.11.2009      | 31.10.2009          |  1.11.2009
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \frametitle{Exercice de BDD}
+        \framesubtitle{Exemple de Cucumber, le plus répandu}
+        \transdissolve
+        \textbf{Exercice~:} En utilisant un maximum du code de l'exercice précédent sur les nombres témoins, réécrivez l'équivalent des tests pytest ou autre en scénarios Behave.
+    \end{frame}
+
+
+    \section{Les tests d’intégration}\label{sec:les-tests-d-integration}
 \end{document}

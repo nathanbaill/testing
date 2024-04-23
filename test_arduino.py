@@ -14,7 +14,7 @@ Play with arduino integer/long overflow and buffer overflow protection.
 import pytest
 from simple_rpc import Interface
 
-RANDOM_DIVIDENDS_AND_DIVSORS = [
+RANDOM_DIVIDENDS_AND_DIVISORS = [
     (2, 3),
     (3, 9),
     (3, 5),
@@ -46,7 +46,7 @@ def interface(interface_port_com: str) -> Interface:
     return Interface(interface_port_com, baudrate=115200)
 
 
-@pytest.mark.parametrize("dividend, divisor", RANDOM_DIVIDENDS_AND_DIVSORS)
+@pytest.mark.parametrize("dividend, divisor", RANDOM_DIVIDENDS_AND_DIVISORS)
 def test_divide_float(
         interface: Interface,
         dividend: int,
@@ -71,7 +71,7 @@ def test_divide_float(
     assert arduino_division_result != python_division_result, error_message
 
 
-@pytest.mark.parametrize("dividend, divisor", RANDOM_DIVIDENDS_AND_DIVSORS)
+@pytest.mark.parametrize("dividend, divisor", RANDOM_DIVIDENDS_AND_DIVISORS)
 def test_float_and_double_identical_precision(
         interface: Interface,
         dividend: int,
@@ -118,7 +118,7 @@ def test_unsigned_long_overflow(
        :param interface: RPC interface with the Arduino Uno
        :param value_to_add: An integer to add to the unsigned long
     """
-    max_unsigned_long = 4294967295  # For the 32 bits Arduino one
+    max_unsigned_long = 2 ** 32 - 1  # For the 32 bits Arduino one
     arduino_addition_result = interface.longOverflow(
         value_to_add
     )

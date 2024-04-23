@@ -1,3 +1,4 @@
 checkmytex
 pytest
 pytest-cov
+arduino-simple-rpc
